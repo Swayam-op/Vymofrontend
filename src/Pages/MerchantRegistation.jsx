@@ -8,6 +8,7 @@ const MerchantRegistation = () => {
     const [merchantDetails, setMerchantDetails] = useState({});
     const [displayToast, setDisplayToast] = useState('hidden');
     const [response, setResponse] = useState();
+    const [buttonDisable,setButtonDisable] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -16,8 +17,9 @@ const MerchantRegistation = () => {
     }
     
     const handleUpload = (event) => {
-        debounce(uploadMerchantDetails, 2000);
-      };
+        debounce(uploadMerchantDetails, 2000); // just to prevent mupltiple submits
+      }; 
+
       var timerId = null;
       const debounce = (func, delay) => {
         clearTimeout(timerId);
@@ -27,15 +29,18 @@ const MerchantRegistation = () => {
       };
 
     const uploadMerchantDetails = async () => {
-        console.log("Merchant Details : ", merchantDetails);
+        // console.log("Merchant Details : ", merchantDetails);
+        setButtonDisable(true);
         axios.post('http://localhost:3002/api/add-merchant-details/', merchantDetails)
             .then((response) => {
-                console.log("Merchant det is uploaded : ", response);
+                // console.log("Merchant det is uploaded : ", response);
                 setResponse(response);
+                setButtonDisable(false);
             })
             .catch((error) => {
                 setResponse(error.response);
-                console.log("Eroor in upload merchant det : ", error.response);
+                setButtonDisable(false);
+                // console.log("Eroor in upload merchant det : ", error.response);
             });
     }
 
@@ -97,9 +102,9 @@ const MerchantRegistation = () => {
                         <h4 className='tracking-widest text-color-lightn-2 text-sm font-medium'>AVERAGE DAILY TRANSACTION</h4>
                         <input onChange={handleChange} name="averageDailyTransaction" value={merchantDetails?.averageDailyTransaction} type="text" className={`w-full h-12 my-3 p-3 tracking-wider text-sm rounded-md text-color-white bg-solid-dark-2 border-2 border-solid-dark shadow-shadow-inset-2 outline-none focus:border-primary-1 transition-colors duration-500 `} />
                     </div>
-                    <button onClick={handleUpload} className='text-white font-semibold rounded-sm w-1/2 py-3 bg-gradient-to-br from-red-700 to-rose-800 hover:from-rose-600 hover:to-red-800 tracking-wider'>
+                    <button disabled={buttonDisable} onClick={handleUpload} className='disabled:cursor-not-allowed text-white font-semibold rounded-sm w-1/2 py-3 bg-gradient-to-br from-red-700 to-rose-800 hover:from-rose-600 hover:to-red-800 tracking-wider'>
                         REGISTER
-                    </button>6
+                    </button>
                 </div>
             </div>
         </div>

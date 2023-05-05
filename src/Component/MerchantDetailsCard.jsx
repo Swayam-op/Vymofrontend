@@ -7,7 +7,7 @@ const MerchantDetailsCard = ({merchant}) => {
     <h1 className='text-white text-sm py-1 font-medium'>Contact Name : {merchant?.contactName}</h1>
     <h1 className='text-white text-sm py-1 font-medium'>Phone Number : {merchant?.phoneNumber}</h1>
     <h1 className='text-white text-sm py-1 font-medium'>Pincode : {merchant?.pincode}</h1>
-    <h1 className='text-white text-sm py-1 font-medium'>location : {merchant?.locationr}</h1>
+    <h1 className='text-white text-sm py-1 font-medium'>location : {merchant?.location}</h1>
     <h1 className='text-white text-sm py-1 font-medium'>website : {merchant?.website}</h1>
     <h1 className='text-white text-sm py-1 font-medium'>Average Daily Transaction : {merchant?.averageDailyTransaction}</h1>
     </div>
