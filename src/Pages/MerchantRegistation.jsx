@@ -31,7 +31,7 @@ const MerchantRegistation = () => {
     const uploadMerchantDetails = async () => {
         // console.log("Merchant Details : ", merchantDetails);
         setButtonDisable(true);
-        axios.post('http://localhost:3002/api/add-merchant-details/', merchantDetails)
+        axios.post('http://localhost:3002/api/merchant/add-merchant-details/', merchantDetails)
             .then((response) => {
                 // console.log("Merchant det is uploaded : ", response);
                 setResponse(response);
